@@ -23,7 +23,7 @@ namespace SPDataUpload
             IEnumerable<List> allLists = ctx.LoadQuery(ctx.Web.Lists.Include(inc => inc.RootFolder, inc => inc.RootFolder.Name));
             ctx.ExecuteQuery();
 
-            List targetList = allLists.SingleOrDefault(l => l.RootFolder.Name == fn);
+            List targetList = allLists.SingleOrDefault(l => l.RootFolder.Name.Equals(fn, StringComparison.CurrentCultureIgnoreCase));
 
             if (targetList == null)
                 throw new FileNotFoundException(String.Format("List {0} not found", fn));
